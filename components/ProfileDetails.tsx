@@ -11,7 +11,6 @@ const ProfileDetails = () => {
         className="w-full h-full justify-end items-start p-6"
         resizeMode="cover"
       >
-        {/* Texto encima de la imagen */}
         <CustomText variant="large" dark={false}>Sign in</CustomText>
       </ImageBackground>
     </View>
