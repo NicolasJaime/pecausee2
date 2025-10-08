@@ -10,7 +10,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <ProfileDetails />
       <MoreDetails />
-      <Link href="/Settingscreen">View details</Link>
+      <Link href="/(home)">View details</Link>
     </View>
   );
 }
