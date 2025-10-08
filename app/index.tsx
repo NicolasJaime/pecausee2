@@ -1,13 +1,30 @@
+import { Link } from 'expo-router';
+import { View, Text, StyleSheet } from 'react-native';
+
 import CustomText from "@/components/ui/CustomText";
 import MoreDetails from "@/components/MoreDetails";
-import ProfileDetails from "@/components/ProfileDetails"
-import "@/global.css";
-import { View } from "react-native";
-export default function Index() {
+import ProfileDetails from "@/components/ProfileDetails";
+
+export default function HomeScreen() {
   return (
-    <View className="bg-[#026A75] w-screen h-screen">
-      <ProfileDetails></ProfileDetails>
-      <MoreDetails></MoreDetails>
+    <View style={styles.container}>
+      <ProfileDetails />
+      <MoreDetails />
+      <Link href="/Settingscreen">View details</Link>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+/*
+
+*/
+/*
+
+*/

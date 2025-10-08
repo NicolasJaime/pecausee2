@@ -19,7 +19,7 @@ function styleSelector(variant:any,dark:boolean){
     if(dark == false){
         style += "text-white "
     }else{
-        style += "text-[#0F626F] "
+        style += "text-black "
     }
     
     switch(variant){
