@@ -1,14 +1,22 @@
-import { Text, View } from 'react-native'
-import React, { Component } from 'react'
+import { Link } from 'expo-router';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 export class Settingscreen extends Component {
   render() {
     return (
       <View>
-        <Text>Settingscreen</Text>
+        <Link href="/HomeScreen">(Home)</Link>
       </View>
     )
   }
 }
 
 export default Settingscreen
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
