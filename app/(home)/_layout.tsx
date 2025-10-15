@@ -20,6 +20,15 @@ export default function HomeLayout() {
       ),
     }}
   />
+  <Tabs.Screen 
+    name="NowPlaying"
+    options={{
+      title: 'Playing Now',
+      tabBarIcon: ({ color, size }) => (
+        <MaterialIcons name="dashboard" color={color} size={size} />
+      ),
+    }}
+  />
   <Tabs.Screen
     name="Settingscreen"
     options={{

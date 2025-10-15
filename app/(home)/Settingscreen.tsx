@@ -6,7 +6,7 @@ export class Settingscreen extends Component {
   render() {
     return (
       <View>
-        <Link href="/HomeScreen">(Home)</Link>
+        <Link href="/">(Log Out)</Link>
       </View>
     )
   }
