@@ -1,11 +1,34 @@
 import React from 'react';
-import { Stack } from "expo-router";
+import { Tabs } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function HomeLayout() {
   return (
-    <Stack >
-      <Stack.Screen name="HomeScreen" />
-      <Stack.Screen name="Settingscreen" />
-    </Stack>
+    <Tabs
+  screenOptions={{
+    tabBarStyle: {
+      backgroundColor: '#ffe5e5',
+    },
+  }}
+>
+  <Tabs.Screen 
+    name="HomeScreen"
+    options={{
+      title: 'DashBoard',
+      tabBarIcon: ({ color, size }) => (
+        <MaterialIcons name="dashboard" color={color} size={size} />
+      ),
+    }}
+  />
+  <Tabs.Screen
+    name="Settingscreen"
+    options={{
+      title: 'Configuración',
+      tabBarIcon: ({ color, size }) => (
+        <MaterialIcons name="settings" color={color} size={size} />
+      ),
+    }}
+  />
+</Tabs>
   );
 }

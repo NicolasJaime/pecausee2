@@ -4,6 +4,7 @@ import { StyleSheet, ScrollView, SafeAreaView, View } from 'react-native';
 import MoreDetails from "@/components/MoreDetails";
 import ProfileDetails from "@/components/ProfileDetails";
 import CustomButtons from '@/components/CustomButtons';
+import ExtraDetails from '@/components/ExtraDetails';
 
 export default function HomeScreen() {
   return (
@@ -11,19 +12,7 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ProfileDetails />
         <MoreDetails />
-
-        {/* Botones en la misma fila */}
-        <View style={styles.buttonRow}>
-          <CustomButtons 
-            title="Inicio 🏠"
-            onPress={() => router.push('./HomeScreen')}
-          />
-          <CustomButtons 
-            title="Configuración ⚙️"
-            onPress={() => router.push('/Settingscreen')}
-          />
-        </View>
-        
+        <ExtraDetails/>
       </ScrollView>
     </SafeAreaView>
   );

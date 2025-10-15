@@ -7,11 +7,14 @@ import ProfileDetails from "@/components/ProfileDetails";
 
 export default function HomeScreen() {
   return (
+    <View>
+
+    </View>
+    );
     <View style={styles.container}>
       <Link href="/Settingscreen">Settings</Link>
       <Link href="/">Index</Link>
     </View>
-  );
 }
 
 const styles = StyleSheet.create({
