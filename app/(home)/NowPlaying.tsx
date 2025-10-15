@@ -1,73 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions, ScrollView } from 'react-native';
-import { Audio } from 'expo-av';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Button, Dimensions } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 const screenWidth = Dimensions.get('window').width;
 
-const songs = [
-  {
-    title: 'SoundHelix Song 1',
-    uri: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-  },
-  {
-    title: 'SoundHelix Song 2',
-    uri: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-  },
-  {
-    title: 'SoundHelix Song 3',
-    uri: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-  },
-];
-
 export default function NowPlaying() {
-  const [sound, setSound] = useState<Audio.Sound | null>(null);
-  const [playingTitle, setPlayingTitle] = useState<string | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  async function playSong(song: { title: string; uri: string }) {
-    if (sound) {
-      await sound.stopAsync();
-      await sound.unloadAsync();
-    }
+  const song = {
+    title: 'MAPS',
+    embedUrl: 'https://www.youtube.com/watch?v=Y7ix6RITXM0&list=RDY7ix6RITXM0&start_radio=1',
+  };
 
-    const { sound: newSound } = await Audio.Sound.createAsync(
-      { uri: song.uri },
-      { shouldPlay: true }
-    );
-    setSound(newSound);
-    setPlayingTitle(song.title);
+  function togglePlayback() {
+    setIsPlaying((prev) => !prev);
   }
-
-  async function stopPlayback() {
-    if (sound) {
-      await sound.stopAsync();
-      setPlayingTitle(null);
-    }
-  }
-
-  useEffect(() => {
-    return () => {
-      if (sound) {
-        sound.unloadAsync();
-      }
-    };
-  }, [sound]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>🎶 Music</Text>
+      <Text style={styles.header}>🎶 Música en tendencia</Text>
 
-      <View style={styles.songList}>
-        {songs.map((song) => (
-          <View key={song.title} style={styles.playerBox}>
-            <Text style={styles.songTitle}>{song.title}</Text>
-            <Button
-              title={playingTitle === song.title ? '⏸️ Detener' : '▶️ Reproducir'}
-              onPress={() =>
-                playingTitle === song.title ? stopPlayback() : playSong(song)
-              }
-            />
-          </View>
-        ))}
+      <View style={styles.playerBox}>
+        <Text style={styles.songTitle}>Reproduciendo: {song.title}</Text>
+        <Button
+          title={isPlaying ? '⏸️ Pausar' : '▶️ Reproducir'}
+          onPress={togglePlayback}
+        />
+        {isPlaying && (
+          <WebView
+            source={{ uri: song.embedUrl }}
+            style={styles.hiddenWebview}
+            allowsInlineMediaPlayback={true}
+            mediaPlaybackRequiresUserAction={false}
+          />
+        )}
       </View>
     </View>
   );
@@ -88,21 +54,21 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: 'center',
   },
-  songList: {
-    flex: 1,
-    justifyContent: 'space-evenly',
-  },
   playerBox: {
     backgroundColor: '#fff3e0',
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',
-    marginBottom: 12,
   },
   songTitle: {
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 12,
+  },
+  hiddenWebview: {
+    width: 0,
+    height: 0,
+    opacity: 0,
   },
 });
 

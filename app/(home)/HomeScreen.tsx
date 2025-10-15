@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { Tabs } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -23,7 +23,7 @@ export default function HomeLayout() {
           screenOptions={{
             tabBarStyle: {
               backgroundColor: '#ffe5e5',
-              borderTopWidth: 0, // 🔥 Elimina línea superior
+              borderTopWidth: 0,
               height: 70,
             },
             tabBarActiveTintColor: '#dc2626',
@@ -59,30 +59,34 @@ export default function HomeLayout() {
           />
         </Tabs>
 
-        {/* 🔻 Footer pegado justo debajo de los tabs */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>© 2025 TuApp Musical 🎶</Text>
         </View>
       </View>
 
-      {/* 🎶 Información musical */}
-      <View style={styles.infoSection}>
-        <Text style={styles.header}>🎶 Música en tendencia</Text>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={styles.infoSection}>
+          <Text style={styles.header}>🎶 Música en tendencia</Text>
 
-        <View style={styles.blockGenres}>
-          <Text style={styles.sectionTitle}>🎧 Tipos de música</Text>
-          {musicGenres.map((genre) => (
-            <Text key={genre} style={styles.genreItem}>• {genre}</Text>
-          ))}
-        </View>
+          <View style={styles.blockGenres}>
+            <Text style={styles.sectionTitle}>🎧 Tipos de música</Text>
+            {musicGenres.map((genre) => (
+              <TouchableOpacity key={genre}>
+                <Text style={styles.genreItem}>• {genre}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
 
-        <View style={styles.blockSongs}>
-          <Text style={styles.sectionTitle}>🔥 Canciones más escuchadas</Text>
-          {topSongs.map((song) => (
-            <Text key={song} style={styles.songItem}>• {song}</Text>
-          ))}
+          <View style={styles.blockSongs}>
+            <Text style={styles.sectionTitle}>🔥 Canciones más escuchadas</Text>
+            {topSongs.map((song) => (
+              <TouchableOpacity key={song}>
+                <Text style={styles.songItem}>• {song}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -95,6 +99,9 @@ const styles = StyleSheet.create({
   tabsWrapper: {
     backgroundColor: '#ffe5e5',
   },
+  scrollContent: {
+    paddingBottom: 40,
+  },
   infoSection: {
     width: screenWidth,
     paddingVertical: 20,
@@ -105,9 +112,8 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     color: '#dc2626',
-    marginBottom: 16,
+    marginBottom: 24,
     textAlign: 'center',
-    fontFamily: 'sans-serif-medium',
   },
   blockGenres: {
     backgroundColor: '#ffeef0',
@@ -125,20 +131,24 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#333',
     marginBottom: 8,
-    fontFamily: 'serif',
   },
   genreItem: {
-    fontSize: 16,
-    color: '#555',
+    fontSize: 18,
+    color: '#333',
+    fontWeight: '500',
     marginVertical: 4,
-    fontFamily: 'sans-serif',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
   },
   songItem: {
-    fontSize: 16,
-    color: '#222',
+    fontSize: 18,
+    color: '#333',
+    fontWeight: '500',
     marginVertical: 4,
-    fontStyle: 'italic',
-    fontFamily: 'monospace',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
   },
   footer: {
     backgroundColor: '#ffe5e5',
@@ -151,4 +161,3 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 });
-
