@@ -1,39 +1,34 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, Dimensions } from 'react-native';
-import { WebView } from 'react-native-webview';
+import React from 'react';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const screenWidth = Dimensions.get('window').width;
 
-export default function NowPlaying() {
-  const [isPlaying, setIsPlaying] = useState(false);
-
+export default function SongView() {
   const song = {
     title: 'MAPS',
-    embedUrl: 'https://www.youtube.com/watch?v=Y7ix6RITXM0&list=RDY7ix6RITXM0&start_radio=1',
+    image: 'https://i.scdn.co/image/ab67616d0000b273298125480feb529c5250f50e',
+    duration: '2:15',
   };
-
-  function togglePlayback() {
-    setIsPlaying((prev) => !prev);
-  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>🎶 Música en tendencia</Text>
+      <Image source={{ uri: song.image }} style={styles.cover} />
+      <View style={styles.infoBox}>
+        <Text style={styles.title}>{song.title}</Text>
+        <Text style={styles.duration}>Duración: {song.duration}</Text>
 
-      <View style={styles.playerBox}>
-        <Text style={styles.songTitle}>Reproduciendo: {song.title}</Text>
-        <Button
-          title={isPlaying ? '⏸️ Pausar' : '▶️ Reproducir'}
-          onPress={togglePlayback}
-        />
-        {isPlaying && (
-          <WebView
-            source={{ uri: song.embedUrl }}
-            style={styles.hiddenWebview}
-            allowsInlineMediaPlayback={true}
-            mediaPlaybackRequiresUserAction={false}
-          />
-        )}
+        <View style={styles.controls}>
+          <TouchableOpacity>
+            <MaterialIcons name="replay-10" size={36} color="#fff" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <MaterialIcons name="pause" size={48} color="#fff" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <MaterialIcons name="forward-10" size={36} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -41,34 +36,38 @@ export default function NowPlaying() {
 
 const styles = StyleSheet.create({
   container: {
-    width: screenWidth,
     flex: 1,
-    backgroundColor: '#fff',
-    paddingVertical: 20,
+    backgroundColor: '#121212',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  header: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#dc2626',
-    marginBottom: 16,
-    textAlign: 'center',
+  cover: {
+    width: screenWidth * 0.85,
+    height: screenWidth * 0.85,
+    borderRadius: 16,
+    marginBottom: 24,
+    resizeMode: 'cover',
   },
-  playerBox: {
-    backgroundColor: '#fff3e0',
-    padding: 16,
-    borderRadius: 8,
+  infoBox: {
     alignItems: 'center',
   },
-  songTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 12,
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    marginBottom: 8,
+    textAlign: 'center',
   },
-  hiddenWebview: {
-    width: 0,
-    height: 0,
-    opacity: 0,
+  duration: {
+    fontSize: 16,
+    color: '#b3b3b3',
+    marginBottom: 20,
+  },
+  controls: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 200,
+    alignItems: 'center',
   },
 });
-
