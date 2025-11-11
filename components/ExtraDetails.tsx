@@ -1,28 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { router } from 'expo-router';
 import CustomButtons from '@/components/CustomButtons';
+import Register from '@/components/Register';
+import Login from '@/components/Login';
 
 export default function ExtraDetails() {
+  const [activeScreen, setActiveScreen] = useState<'login' | 'register' | null>(null);
+
   return (
     <View style={styles.container}>
-  <CustomButtons 
-    title="Login 🔐"
-    onPress={() => router.push('/HomeScreen')}
-  />
-  <CustomButtons 
-    title="Registro 📝"
-    onPress={() => router.push('/HomeScreen')}
-  />
-  <CustomButtons 
-    title="Inicio 🏠"
-    onPress={() => router.push('/HomeScreen')}
-  />
-  <CustomButtons 
-    title="Configuración ⚙️"
-    onPress={() => router.push('/Settingscreen')}
-  />
-</View>
+      {activeScreen === null && (
+        <>
+          <CustomButtons 
+            title="Login 🔐"
+            onPress={() => setActiveScreen('login')}
+          />
+          <CustomButtons 
+            title="Register 📝"
+            onPress={() => setActiveScreen('register')}
+          />
+        </>
+      )}
+
+      {activeScreen === 'login' && <Login />}
+      {activeScreen === 'register' && <Register />}
+    </View>
   );
 }
 
@@ -34,8 +36,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 12,
     marginTop: 20,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
     justifyContent: 'center',
     gap: 10,
   },

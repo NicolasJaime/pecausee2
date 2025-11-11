@@ -1,10 +1,9 @@
-import { Link, router } from 'expo-router';
-import { StyleSheet, ScrollView, SafeAreaView, View } from 'react-native';
+import { StyleSheet, ScrollView, SafeAreaView, View, TouchableOpacity, Text } from 'react-native';
+import { router } from 'expo-router';
 
 import MoreDetails from "@/components/MoreDetails";
 import ProfileDetails from "@/components/ProfileDetails";
-import CustomButtons from '@/components/CustomButtons';
-import ExtraDetails from '@/components/ExtraDetails';
+import ExtraDetails from "@/components/ExtraDetails";
 
 export default function HomeScreen() {
   return (
@@ -12,7 +11,10 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <ProfileDetails />
         <MoreDetails />
-        <ExtraDetails/>
+        <ExtraDetails />
+
+
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -29,8 +31,18 @@ const styles = StyleSheet.create({
   },
   buttonRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 10,
+    justifyContent: 'center',
     marginTop: 20,
+  },
+  registerButton: {
+    backgroundColor: '#007bff',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
