@@ -7,13 +7,14 @@ const MoreDetails = () => {
   const [Contraseña, setContraseña] = useState('');
 
   return (
-    <View className="h-1/2 w-screen bg-white flex flex-col justify-start items-start gap-4 p-4">
+    <View className="w-full bg-white rounded-xl p-5 shadow-md items-center gap-4 mt-10">
       <CustomText variant="large" dark={true}>Email</CustomText>
       <TextInput
         placeholder=".............."
         value={Email}
         onChangeText={setEmail}
-        className="border border-gray-300 rounded-2xl p-3 w-72 text-base"
+        className="border border-gray-300 rounded-2xl p-3 w-[90%] text-base"
+        keyboardType="email-address"
       />
 
       <CustomText variant="large" dark={true}>Contraseña</CustomText>
@@ -21,7 +22,7 @@ const MoreDetails = () => {
         placeholder="***********"
         value={Contraseña}
         onChangeText={setContraseña}
-        className="border border-gray-300 rounded-2xl p-3 w-72 text-base"
+        className="border border-gray-300 rounded-2xl p-3 w-[90%] text-base"
         secureTextEntry
       />
     </View>

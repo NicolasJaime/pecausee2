@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
 
@@ -13,18 +13,20 @@ export default function RegiserForm() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Formulario de Registro</Text>
+    <View className="flex-1 bg-white justify-center px-5">
+      <Text className="text-2xl font-bold mb-8 text-center">
+        Formulario de Registro
+      </Text>
 
       <TextInput
-        style={styles.input}
+        className="border border-gray-300 rounded-lg p-3 mb-4 text-base"
         placeholder="Nombre"
         value={name}
         onChangeText={setName}
       />
 
       <TextInput
-        style={styles.input}
+        className="border border-gray-300 rounded-lg p-3 mb-4 text-base"
         placeholder="Correo electrónico"
         value={email}
         onChangeText={setEmail}
@@ -33,75 +35,30 @@ export default function RegiserForm() {
       />
 
       <TextInput
-        style={styles.input}
+        className="border border-gray-300 rounded-lg p-3 mb-4 text-base"
         placeholder="Contraseña"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
 
-      {/* Botón de registro (el que moviste) */}
-      <View style={styles.buttonRow}>
+      {/* Botón de registro */}
+      <View className="flex-row justify-center mt-2">
         <TouchableOpacity
           onPress={handleRegister}
-          style={styles.registerButton}
+          className="bg-blue-600 py-3 px-6 rounded-lg"
         >
-          <Text style={styles.buttonText}>Register</Text>
+          <Text className="text-white font-bold text-lg">Register</Text>
         </TouchableOpacity>
       </View>
 
       {/* Botón para volver atrás */}
-      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <Text style={styles.backText}>Volver</Text>
+      <TouchableOpacity
+        className="items-center py-2 mt-5"
+        onPress={() => router.back()}
+      >
+        <Text className="text-blue-600 text-lg">Volver</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 30,
-    textAlign: 'center',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 16,
-    fontSize: 16,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  registerButton: {
-    backgroundColor: '#007bff',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  backButton: {
-    alignItems: 'center',
-    paddingVertical: 10,
-    marginTop: 20,
-  },
-  backText: {
-    color: '#007bff',
-    fontSize: 16,
-  },
-});

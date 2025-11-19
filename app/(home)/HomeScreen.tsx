@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { Tabs } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -17,8 +17,8 @@ const screenWidth = Dimensions.get('window').width;
 
 export default function HomeLayout() {
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.tabsWrapper}>
+    <View className="flex-1 bg-white">
+      <View className="bg-pink-100">
         <Tabs
           screenOptions={{
             tabBarStyle: {
@@ -59,29 +59,38 @@ export default function HomeLayout() {
           />
         </Tabs>
 
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>© 2025 TuApp Musical 🎶</Text>
+        <View className="bg-pink-100 py-1.5 items-center">
+          <Text className="text-sm text-red-600 font-medium">© 2025 TuApp Musical 🎶</Text>
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.infoSection}>
-          <Text style={styles.header}>🎶 Música en tendencia</Text>
+      <ScrollView contentContainerClassName="pb-10">
+        <View
+          style={{ width: screenWidth }}
+          className="py-5 px-6 bg-gray-50"
+        >
+          <Text className="text-2xl font-bold text-red-600 mb-6 text-center">
+            🎶 Música en tendencia
+          </Text>
 
-          <View style={styles.blockGenres}>
-            <Text style={styles.sectionTitle}>🎧 Tipos de música</Text>
+          <View className="bg-pink-50 p-3 rounded-lg mb-4">
+            <Text className="text-xl font-semibold text-gray-800 mb-2">🎧 Tipos de música</Text>
             {musicGenres.map((genre) => (
               <TouchableOpacity key={genre}>
-                <Text style={styles.genreItem}>• {genre}</Text>
+                <Text className="text-lg text-gray-800 font-medium my-1 py-2 px-3 rounded-lg">
+                  • {genre}
+                </Text>
               </TouchableOpacity>
             ))}
           </View>
 
-          <View style={styles.blockSongs}>
-            <Text style={styles.sectionTitle}>🔥 Canciones más escuchadas</Text>
+          <View className="bg-orange-50 p-3 rounded-lg">
+            <Text className="text-xl font-semibold text-gray-800 mb-2">🔥 Canciones más escuchadas</Text>
             {topSongs.map((song) => (
               <TouchableOpacity key={song}>
-                <Text style={styles.songItem}>• {song}</Text>
+                <Text className="text-lg text-gray-800 font-medium my-1 py-2 px-3 rounded-lg">
+                  • {song}
+                </Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -90,74 +99,3 @@ export default function HomeLayout() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  tabsWrapper: {
-    backgroundColor: '#ffe5e5',
-  },
-  scrollContent: {
-    paddingBottom: 40,
-  },
-  infoSection: {
-    width: screenWidth,
-    paddingVertical: 20,
-    paddingHorizontal: 24,
-    backgroundColor: '#fefefe',
-  },
-  header: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#dc2626',
-    marginBottom: 24,
-    textAlign: 'center',
-  },
-  blockGenres: {
-    backgroundColor: '#ffeef0',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  blockSongs: {
-    backgroundColor: '#fff3e0',
-    padding: 12,
-    borderRadius: 8,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
-  },
-  genreItem: {
-    fontSize: 18,
-    color: '#333',
-    fontWeight: '500',
-    marginVertical: 4,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-  },
-  songItem: {
-    fontSize: 18,
-    color: '#333',
-    fontWeight: '500',
-    marginVertical: 4,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-  },
-  footer: {
-    backgroundColor: '#ffe5e5',
-    paddingVertical: 6,
-    alignItems: 'center',
-  },
-  footerText: {
-    fontSize: 14,
-    color: '#dc2626',
-    fontWeight: '500',
-  },
-});

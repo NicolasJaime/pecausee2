@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const screenWidth = Dimensions.get('window').width;
@@ -12,13 +12,26 @@ export default function SongView() {
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: song.image }} style={styles.cover} />
-      <View style={styles.infoBox}>
-        <Text style={styles.title}>{song.title}</Text>
-        <Text style={styles.duration}>Duración: {song.duration}</Text>
+    <View className="flex-1 bg-[#121212] items-center justify-center px-6">
+      <Image
+        source={{ uri: song.image }}
+        style={{
+          width: screenWidth * 0.85,
+          height: screenWidth * 0.85,
+          borderRadius: 16,
+          marginBottom: 24,
+          resizeMode: 'cover',
+        }}
+      />
+      <View className="items-center">
+        <Text className="text-2xl font-bold text-white mb-2 text-center">
+          {song.title}
+        </Text>
+        <Text className="text-base text-gray-400 mb-5">
+          Duración: {song.duration}
+        </Text>
 
-        <View style={styles.controls}>
+        <View className="flex-row justify-between w-52 items-center">
           <TouchableOpacity>
             <MaterialIcons name="replay-10" size={36} color="#fff" />
           </TouchableOpacity>
@@ -33,41 +46,3 @@ export default function SongView() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#121212',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 24,
-  },
-  cover: {
-    width: screenWidth * 0.85,
-    height: screenWidth * 0.85,
-    borderRadius: 16,
-    marginBottom: 24,
-    resizeMode: 'cover',
-  },
-  infoBox: {
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#ffffff',
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  duration: {
-    fontSize: 16,
-    color: '#b3b3b3',
-    marginBottom: 20,
-  },
-  controls: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 200,
-    alignItems: 'center',
-  },
-});
